@@ -30,7 +30,7 @@ put:
       name: Authorization
       required: false
     - in: formData
-      name: newsletter
+      name: news
       required: false
       type: text
     - in: formData
