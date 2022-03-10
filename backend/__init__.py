@@ -1,6 +1,6 @@
 import re
 from flask import Flask
-
+from backend.api.v1 import views
 
 def create_app(test_config=None):
 
@@ -13,8 +13,6 @@ def create_app(test_config=None):
     else:
         app.config.from_mapping(test_config)
 
-    @app.route("/")
-    def hello_world():
-        return "<p>Hello, World!</p>"
+    app.register_blueprint(views.v1)
 
     return app
