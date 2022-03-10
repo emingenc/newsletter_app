@@ -5,6 +5,7 @@ from flask.json import jsonify
 from backend.api.v1.models import Newsletter, db
 from flasgger import swag_from
 from pathlib import Path
+from flask_jwt_extended import jwt_required
 from backend.constants.http_status_codes import HTTP_200_OK, HTTP_201_CREATED, HTTP_404_NOT_FOUND
 
 
@@ -32,6 +33,7 @@ def newsletters():
 
 @v1.post("/newsletters")
 @swag_from("docs/newsletters.yaml")
+@jwt_required()
 def create_newsletter():
     # form data
     data = request.form
@@ -75,6 +77,7 @@ def newsletter(id):
 
 @v1.put("/newsletters/<int:id>")
 @swag_from("docs/newsletters_detailed.yaml")
+@jwt_required()
 def update_newsletter(id):
     data = request.form
 
