@@ -2,19 +2,12 @@ GET and POST newsletters details 'newsletters/id'
 ---
 tags:
   - Newsletters details
-consumes:
-
-  - multipart/form-data
-  - application/json
 
 get:
+  path: /newsletters/{id}
   description: Newsletters details
-  summary: Newsletters details
-  operationId: getNewsletter
-  produces:
-    - application/json
   parameters:
-    - in: url
+    - in: path
       name: id
       required: true
       type: integer
@@ -26,13 +19,10 @@ get:
       description: Fails to get items due to authentication error
 
 put:
+  path: /newsletters/{id}
   description: Update a newsletter
-  summary: Update a newsletter
-  operationId: updateNewsletter
-  produces:
-    - application/json
   parameters:
-    - in: url
+    - in: path
       name: id
       required: true
       type: integer
@@ -51,4 +41,9 @@ put:
       name: title
       required: false
       type: text
-      
+
+responses:
+  '200':
+    description: Newsletters updated
+  '401':
+    description: Fails to get items due to authentication error
