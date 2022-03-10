@@ -2,14 +2,9 @@ GET and Post newsletters
 ---
 tags:
   - Newsletters
-consumes:
-   - multipart/form-data
-    - application/json
 
 get:
   description: Newsletters list
-  summary: Newsletters list
-  operationId: getNewsletters
   produces:
     - application/json
   
@@ -21,8 +16,6 @@ get:
 
 post:
   description: Create a new newsletter
-  summary: Create a new newsletter
-  operationId: createNewsletter
   produces:
     - application/json
   parameters:
@@ -43,7 +36,12 @@ post:
       required: false
       type: text
   responses:  
-    '200':
-      description: Newsletters list
+    '201':
+      description: Newsletters created
     '401':
       description: Fails to get items due to authentication error
+responses:
+  '200':
+    description: Newsletters list
+  '401':
+    description: Fails to get items due to authentication error

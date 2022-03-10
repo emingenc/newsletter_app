@@ -19,7 +19,12 @@ def newsletters():
     newsletters = Newsletter.query.all()
 
     if newsletters:
-        return jsonify({"newsletters": [newsletter.serialize() for newsletter in newsletters]})
+        return jsonify({"newsletters": [{ "id": newsletter.id,
+                                            "news": newsletter.news,
+                                            "title": newsletter.title,
+                                            "photo": newsletter.photo,
+                                            "date": newsletter.date,
+                                            "updated_at": newsletter.updated_at} for newsletter in newsletters]})
     else:
         return jsonify({'message': 'Item not found'}), HTTP_404_NOT_FOUND
 
@@ -40,7 +45,14 @@ def create_newsletter():
     db.session.add(newsletter)
     db.session.commit()
 
-    return jsonify({"newsletter": newsletter.serialize()}) , HTTP_201_CREATED
+    return jsonify({
+        "message": "Newsletter created successfully",
+        "id": newsletter.id,
+        "news": newsletter.news,
+        "title": newsletter.title,
+        "photo": newsletter.photo,
+        "date": newsletter.date
+    }) , HTTP_201_CREATED
 
 
 @v1.get("/newsletters/<int:id>")
@@ -48,7 +60,14 @@ def create_newsletter():
 def newsletter(id):
     newsletter = Newsletter.query.get(id)
 
-    return jsonify({"newsletter": newsletter.serialize()}) , HTTP_200_OK
+    return jsonify({
+        "id": newsletter.id,
+        "news": newsletter.news,
+        "title": newsletter.title,
+        "photo": newsletter.photo,
+        "date": newsletter.date,
+        "updated_at": newsletter.updated_at
+    }) , HTTP_200_OK
 
 
 @v1.put("/newsletters/<int:id>")
