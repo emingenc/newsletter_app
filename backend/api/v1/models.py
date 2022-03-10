@@ -1,9 +1,8 @@
-from flask_sqlalchemy import SQLAlchemy
 import string
 import random
 from datetime import datetime
+from backend.database import db
 
-db = SQLAlchemy()
 
 class Newsletter(db.Model):
     '''Newsletter model that contains news , 
