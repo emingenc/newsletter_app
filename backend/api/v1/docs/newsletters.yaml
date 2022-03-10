@@ -1,0 +1,49 @@
+GET and Post newsletters
+---
+tags:
+  - Newsletters
+consumes:
+   - multipart/form-data
+    - application/json
+
+get:
+  description: Newsletters list
+  summary: Newsletters list
+  operationId: getNewsletters
+  produces:
+    - application/json
+  
+  responses:
+    '200':
+      description: Newsletters list
+    '401':
+      description: Fails to get items due to authentication error
+
+post:
+  description: Create a new newsletter
+  summary: Create a new newsletter
+  operationId: createNewsletter
+  produces:
+    - application/json
+  parameters:
+    - in: header
+      name: Authorization
+      required: false
+    # {news:news artictle, photo: img file, title:text}
+    - in: formData
+      name: news
+      required: false
+      type: text
+    - in: formData
+      name: photo
+      required: false
+      type: file
+    - in: formData
+      name: title
+      required: false
+      type: text
+  responses:  
+    '200':
+      description: Newsletters list
+    '401':
+      description: Fails to get items due to authentication error

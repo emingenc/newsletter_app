@@ -1,0 +1,54 @@
+GET and POST newsletters details 'newsletters/id'
+---
+tags:
+  - Newsletters details
+consumes:
+
+  - multipart/form-data
+  - application/json
+
+get:
+  description: Newsletters details
+  summary: Newsletters details
+  operationId: getNewsletter
+  produces:
+    - application/json
+  parameters:
+    - in: url
+      name: id
+      required: true
+      type: integer
+
+  responses:
+    '200':
+      description: Newsletters details
+    '401':
+      description: Fails to get items due to authentication error
+
+put:
+  description: Update a newsletter
+  summary: Update a newsletter
+  operationId: updateNewsletter
+  produces:
+    - application/json
+  parameters:
+    - in: url
+      name: id
+      required: true
+      type: integer
+    - in: header
+      name: Authorization
+      required: false
+    - in: formData
+      name: newsletter
+      required: false
+      type: text
+    - in: formData
+      name: photo
+      required: false
+      type: file
+    - in: formData
+      name: title
+      required: false
+      type: text
+      

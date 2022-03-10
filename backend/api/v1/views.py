@@ -1,7 +1,6 @@
 from flask import Blueprint, request
 from flask.json import jsonify
-from backend.api.v1.models import Newsletter
-from backend.database import db
+from backend.database import db, Newsletter
 from flasgger import swag_from
 from backend.constants.http_status_codes import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT,
                                                  HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_409_CONFLICT)
@@ -14,7 +13,7 @@ v1.get("/ping")(lambda: jsonify({"message": "pong"}))
 
 
 @v1.get("/newsletters")
-@swag_from("docs/newsletters/stats.yaml")
+@swag_from("docs/newsletters.yaml")
 def newsletters():
     newsletters = Newsletter.query.all()
 
@@ -26,10 +25,17 @@ def newsletters():
 
 
 @v1.post("/newsletters")
-@swag_from("docs/newsletters/stats.yaml")
+@swag_from("docs/newsletters.yaml")
 def create_newsletter():
-    data = request.get_json()
-    newsletter = Newsletter(**data)
+    # form data
+    print(request)
+    data = request.form
+    print(data)
+    news = data.get("news")
+    title = data.get("title")
+    photo = data.get("photo")
+
+    newsletter = Newsletter(news = news, title = title, photo = photo)
     db.session.add(newsletter)
     db.session.commit()
 
@@ -37,7 +43,7 @@ def create_newsletter():
 
 
 @v1.get("/newsletters/<int:id>")
-@swag_from("docs/newsletters/stats.yaml")
+@swag_from("docs/newsletters_detailed.yaml")
 def newsletter(id):
     newsletter = Newsletter.query.get(id)
 
@@ -45,7 +51,7 @@ def newsletter(id):
 
 
 @v1.put("/newsletters/<int:id>")
-@swag_from("docs/newsletters/stats.yaml")
+@swag_from("docs/newsletters_detailed.yaml")
 def update_newsletter(id):
     data = request.get_json()
 
