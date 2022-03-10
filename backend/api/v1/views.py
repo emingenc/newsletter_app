@@ -42,9 +42,10 @@ def create_newsletter():
     name = str(uuid.uuid4()).split('-')[0]
     ext = file.filename.split('.')[-1]
     photo = f'{os.environ.get("UPLOAD_FOLDER")}{ name}.{ext}'
+    photo_name = f'uploads/{name}.{ext}'
     file.save(photo)
 
-    newsletter = Newsletter(news = news, title = title, photo = photo)
+    newsletter = Newsletter(news = news, title = title, photo = photo_name)
     db.session.add(newsletter)
     db.session.commit()
 
@@ -85,7 +86,7 @@ def update_newsletter(id):
 
     if file:
         print(newsletter.photo,'sddsad')
-        old_photo = Path.home() /'projects/newsletter_app' /newsletter.photo
+        old_photo = Path.cwd() / 'backend/static'/newsletter.photo
         print(old_photo)
         if old_photo.exists():
             print(f"Deleting {newsletter.photo}")
@@ -94,7 +95,8 @@ def update_newsletter(id):
         ext = file.filename.split('.')[-1]
         photo = f'{os.environ.get("UPLOAD_FOLDER")}{ name}.{ext}'
         file.save(photo)
-        newsletter.photo = photo
+        photo_name = f'uploads/{name}.{ext}'
+        newsletter.photo = photo_name
 
     db.session.commit()
 
