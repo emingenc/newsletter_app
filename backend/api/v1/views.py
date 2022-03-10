@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from flask.json import jsonify
-from backend.database import db, Newsletter
+from backend.api.v1.models import Newsletter
+from backend.database import db
 from flasgger import swag_from
 from backend.constants.http_status_codes import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT,
                                                  HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_409_CONFLICT)
