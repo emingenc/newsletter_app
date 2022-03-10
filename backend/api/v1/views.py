@@ -1,9 +1,8 @@
 import os
-from flask import  Blueprint, request, Config
-from flask.json import jsonify
 import uuid
-from backend.api.v1.models import Newsletter
-from backend.database import db
+from flask import  Blueprint, request
+from flask.json import jsonify
+from backend.api.v1.models import Newsletter, db
 from flasgger import swag_from
 from pathlib import Path
 from backend.constants.http_status_codes import HTTP_200_OK, HTTP_201_CREATED, HTTP_404_NOT_FOUND
