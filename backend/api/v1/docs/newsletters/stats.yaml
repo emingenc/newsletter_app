@@ -1,0 +1,17 @@
+GET stats about newsletters
+---
+tags:
+  - Newsletters
+
+parameters:
+  - in: header
+    name: Authorization
+    required: false
+
+responses:
+  200:
+    description: Newsletters stats
+
+  401:
+    description: Fails to get items due to authentication error
+    
