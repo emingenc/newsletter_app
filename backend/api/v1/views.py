@@ -32,8 +32,8 @@ def newsletters():
 
 
 @v1.post("/newsletters")
-@swag_from("docs/newsletters.yaml")
 @jwt_required()
+@swag_from("docs/newsletters.yaml")
 def create_newsletter():
     # form data
     data = request.form
@@ -76,8 +76,8 @@ def newsletter(id):
 
 
 @v1.put("/newsletters/<int:id>")
-@swag_from("docs/newsletters_detailed.yaml")
 @jwt_required()
+@swag_from("docs/newsletters_detailed.yaml")
 def update_newsletter(id):
     data = request.form
 

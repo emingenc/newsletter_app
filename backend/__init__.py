@@ -35,6 +35,10 @@ def create_app(test_config=None):
     JWTManager(app)
     app.register_blueprint(v1)
     app.register_blueprint(auth)
+
+    @app.before_first_request
+    def create_tables():
+        db.create_all()
     
 
     Swagger(app, config=swagger_config, template=template)

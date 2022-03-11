@@ -9,7 +9,7 @@ from backend.constants.http_status_codes import (HTTP_200_OK, HTTP_201_CREATED, 
 
 
 
-auth = Blueprint("auth", __name__, url_prefix="/auth")
+auth = Blueprint("auth", __name__, url_prefix="/api/v1/auth")
 
 
 @auth.post('/register')
