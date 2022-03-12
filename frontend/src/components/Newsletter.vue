@@ -31,7 +31,7 @@
         <div v-show="expanded">
           <q-separator />
           <q-card-section class="text-subitle2">
-            {{ lorem }}
+            {{ main }}
           </q-card-section>
         </div>
       </q-slide-transition>
@@ -39,8 +39,10 @@
 </template>
 <script setup>
 import { defineComponent, ref } from 'vue'
+import {useNewsletterStore} from '../store/newsletter'
+import { storeToRefs} from 'pinia'
 
-let lorem = 'dasdasdsa'
+let main = storeToRefs(useNewsletterStore())
 let expanded = ref(false)
 
 
