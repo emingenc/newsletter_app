@@ -7,7 +7,8 @@
         <div class="text-h5 q-mt-sm q-mb-xs">{{title}}</div>
         <div class="text-caption text-grey">
           {{ news.slice(0, 350) }}
-        <q-btn no-caps flat :align="'right'" label="< Detail View > "/>
+        <q-btn no-caps flat :align="'right'" label="< Detail View > " :to="`/newsletter/${id}`" />
+        
         </div>
         {{date}}
       </q-card-section>
@@ -35,6 +36,15 @@ const props = defineProps({
     default: "2020-01-01",
   },
 })
+
+const detailView = (id) => {
+  router.push({
+    name: 'newsletter',
+    params: {
+      id: id
+    }
+  })
+}
 
 
 </script>
