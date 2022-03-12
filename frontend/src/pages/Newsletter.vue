@@ -1,33 +1,46 @@
 <template>  
-    <q-page class="flex flex-center">
-        <q-card class="my-card q-pa-xl" flat bordered>
+    <q-page class="flex flex-center fit">
+        
+        <q-card class="my-card q-pa-xl fit" flat bordered>
+            <p class="row ">{{newsletter.date}}</p>
             <q-img
-                src="https://cdn.quasar.dev/img/parallax2.jpg"
+                :src="newsletter.photo"
             />
 
             <q-card-section>
-                <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
+                <div class="text-h5 q-mt-sm q-mb-xs">{{newsletter.title}}</div>
                 <div class="text-caption text-grey">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    {{newsletter.news}}
                 </div>
             </q-card-section>
 
 
-            <q-slide-transition>
-                <div v-show="expanded">
-                <q-separator />
-                <q-card-section class="text-subitle2">
-                    {{ main }}
-                </q-card-section>
-                </div>
-            </q-slide-transition>
+           
             </q-card>
     </q-page>
 </template>
 <script setup>
+import {useNewsletterStore} from 'src/store/newsletter'
+import { storeToRefs} from 'pinia'
+import { api } from 'src/boot/axios';
+import { useRoute } from 'vue-router'
+
+let newsletterState = storeToRefs(useNewsletterStore())
+let newsletter = newsletterState.newsletter
+
+const route = useRoute()
+
+let id = route.params.id
+console.log(id)
+
+api.get('/api/v1/newsletters/'+id).then(response => {
+    useNewsletterStore().newsletter = {
+        id: response.data.id,
+        title: response.data.title,
+        news: response.data.news,
+        photo: response.data.photo,
+        date: response.data.date
+    }
+})
+
 </script>

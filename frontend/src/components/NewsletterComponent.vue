@@ -37,14 +37,4 @@ const props = defineProps({
   },
 })
 
-const detailView = (id) => {
-  router.push({
-    name: 'newsletter',
-    params: {
-      id: id
-    }
-  })
-}
-
-
 </script>
