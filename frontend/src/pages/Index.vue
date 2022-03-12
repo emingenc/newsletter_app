@@ -13,10 +13,12 @@
 <script setup>
 import Newsletter from 'src/components/NewsletterComponent.vue'
 import {useNewsletterStore} from 'src/store/newsletter'
+import { useAuthStore } from 'src/store/auth';
 import { storeToRefs} from 'pinia'
 import { api } from 'src/boot/axios';
 
 let newsletterState = storeToRefs(useNewsletterStore())
+let authStore = useAuthStore()
 let newsletters = newsletterState.newsletters
 
 
