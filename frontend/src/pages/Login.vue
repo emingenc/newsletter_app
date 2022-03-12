@@ -32,8 +32,11 @@
 <script setup>
 import { ref } from 'vue'
 import {useAuthStore} from 'src/store/auth'
-import { storeToRefs} from 'pinia'
 import { api } from 'src/boot/axios';
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 
 const submitResult = ref({})
 let authStore = useAuthStore()
@@ -55,11 +58,10 @@ function onSubmit(e) {
     }
     api.post('auth/login', submitResult.value, headers)
     .then(response => {
-                                console.log(response.data)
-                                authStore.user = response.data.user
-                // authStore.token = response.data.token
-                // authStore.user = response.data.user
-                // authStore.isLoggedIn = true
+     authStore.user = response.data.user
+
+    }).then(() => {
+        router.push('/')
     })
 }
 
