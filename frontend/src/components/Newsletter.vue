@@ -42,7 +42,7 @@ import { defineComponent, ref } from 'vue'
 import {useNewsletterStore} from '../store/newsletter'
 import { storeToRefs} from 'pinia'
 
-let main = storeToRefs(useNewsletterStore())
+let newsletterState = storeToRefs(useNewsletterStore())
 let expanded = ref(false)
 
 

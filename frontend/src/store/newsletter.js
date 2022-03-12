@@ -1,12 +1,25 @@
 import { defineStore } from "pinia";
 import { watch } from "vue";
 
-export const useNewsletterStore = defineStore("main", {
-    state: () => ({
-        newsletters: [2,1],
-        newsletter: {},
-        test: 'dsdsdssd',
-    }),
+
+const STATE_NAME = "newsletterState";
+
+const defaultState = {
+    newsletters: [2,1],
+    newsletter: {},
+}
+
+const getDefaultState = () => {
+    if (localStorage.getItem(STATE_NAME) !== null) {
+        return JSON.parse(localStorage.getItem(STATE_NAME));
+    }
+    
+    return defaultState;
+};
+
+
+export const useNewsletterStore = defineStore(STATE_NAME, {
+    state: getDefaultState,
     getters: {
         getFirstNewsletter: state => {
             return state.newsletters[0];
