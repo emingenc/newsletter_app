@@ -33,7 +33,7 @@ const route = useRoute()
 let id = route.params.id
 console.log(id)
 
-api.get('/api/v1/newsletters/'+id).then(response => {
+api.get('newsletters/'+id).then(response => {
     useNewsletterStore().newsletter = {
         id: response.data.id,
         title: response.data.title,

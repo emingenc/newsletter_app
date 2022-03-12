@@ -30,15 +30,21 @@
     </q-page>
 </template>
 <script setup>
-import { defineComponent, ref } from 'vue'
-import {useAuthStore} from '../store/auth'
+import { ref } from 'vue'
+import {useAuthStore} from 'src/store/auth'
 import { storeToRefs} from 'pinia'
+import { api } from 'src/boot/axios';
 
 const submitResult = ref({})
 let authStore = useAuthStore()
 
 let email = ref('')
 let password = ref('')
+
+let headers = {
+    'accept': 'application/json',
+    'Content-Type': 'application/json'
+};
 
 function onSubmit(e) {
     
@@ -47,10 +53,14 @@ function onSubmit(e) {
         email: email,
         password: password
     }
-    authStore.user = {
-        email: email,
-        password: password
-    }
+    api.post('auth/login', submitResult.value, headers)
+    .then(response => {
+                                console.log(response.data)
+                                authStore.user = response.data.user
+                // authStore.token = response.data.token
+                // authStore.user = response.data.user
+                // authStore.isLoggedIn = true
+    })
 }
 
 

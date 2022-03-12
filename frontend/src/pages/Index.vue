@@ -20,7 +20,7 @@ let newsletterState = storeToRefs(useNewsletterStore())
 let newsletters = newsletterState.newsletters
 
 
-api.get('/api/v1/newsletters').then(response => {
+api.get('newsletters').then(response => {
   useNewsletterStore().newsletters = response.data.newsletters
 
 })
