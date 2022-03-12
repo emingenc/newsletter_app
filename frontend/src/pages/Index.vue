@@ -15,11 +15,16 @@ import Newsletter from 'src/components/NewsletterComponent.vue'
 
 import {useNewsletterStore} from '../store/newsletter'
 import { storeToRefs} from 'pinia'
+import { api } from 'src/boot/axios';
 
 let newsletterState = storeToRefs(useNewsletterStore())
 
 let newsletters  = newsletterState.newsletters
-console.log(newsletters)
+
+api.get('/api/v1/newsletters').then(response => {
+  newsletters = response.data
+  newsletterState.newsletters = newsletters
+})
 
 
 </script>
