@@ -1,10 +1,23 @@
 import { defineStore } from "pinia";
 import { watch } from "vue";
 
-export const useAuthStore = defineStore("main", {
-    state: () => ({
-        user: {},
-    }),
+
+const STATE_NAME = "authState";
+
+const defaultState = {
+    user:{},
+  }
+
+const getDefaultState = () => {
+if (localStorage.getItem(STATE_NAME) !== null) {
+    return JSON.parse(localStorage.getItem(STATE_NAME));
+}
+
+return defaultState;
+};
+
+export const useAuthStore = defineStore(STATE_NAME, {
+    state: getDefaultState,
     getters: {
     },
     mutations: {
@@ -14,9 +27,9 @@ export const useAuthStore = defineStore("main", {
 });
 
 watch(
-    () => useAuthStore,
+    () => useAuthStore(),
     () => {
-      localStorage.setItem(STATE_NAME, JSON.stringify(useAuthStore));
+      localStorage.setItem(STATE_NAME, JSON.stringify(useAuthStore()));
     },
     { deep: true }
   );
