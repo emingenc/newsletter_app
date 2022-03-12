@@ -12,8 +12,6 @@
 
 <script setup>
 import Newsletter from 'src/components/NewsletterComponent.vue'
-import { ref } from 'vue';
-
 import {useNewsletterStore} from 'src/store/newsletter'
 import { storeToRefs} from 'pinia'
 import { api } from 'src/boot/axios';
