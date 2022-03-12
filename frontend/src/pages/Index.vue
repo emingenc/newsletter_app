@@ -8,6 +8,6 @@
 
 <script setup>
  // import components/Newsletter.vue
-import Newsletter from 'components/Newsletter.vue'
+import Newsletter from 'src/components/NewsletterComponent.vue'
 
 </script>
