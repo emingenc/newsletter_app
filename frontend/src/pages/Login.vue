@@ -1,6 +1,7 @@
 <template>
-    <q-page class="flex flex-center login">
+    <q-page class="flex flex-center row">
         <q-form @submit="onSubmit" class="q-gutter-md">
+            <h5 class="flex flex-center" >Login</h5>
             <div class="q-gutter-md" >
                     <q-input
                         v-model="email"
