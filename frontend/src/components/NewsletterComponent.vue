@@ -3,21 +3,22 @@
       <q-img
         :src="image"
       />
-
       <q-card-section>
         <div class="text-h5 q-mt-sm q-mb-xs">{{title}}</div>
         <div class="text-caption text-grey">
           {{ content.slice(0, 350) }}
-        <q-btn no-caps flat :align="right" label="< Read More > "/>
+        <q-btn no-caps flat :align="'right'" label="< Detail View > "/>
         </div>
+        {{date}}
       </q-card-section>
     </q-card>
 </template>
 <script setup>
-import {  ref } from 'vue'
-import {useNewsletterStore} from '../store/newsletter'
-import { storeToRefs} from 'pinia'
 const props = defineProps({
+  id: {
+    type: String,
+    default: '',
+  },
   title: {
     type: String,
     default: 'Title',
@@ -30,11 +31,11 @@ const props = defineProps({
     type: String,
     default: 'https://cdn.quasar.dev/img/parallax2.jpg',
   },
+  date: {
+    type: String,
+    default: "2020-01-01",
+  },
 })
-
-
-let newsletterState = storeToRefs(useNewsletterStore())
-let expanded = ref(false)
 
 
 </script>
