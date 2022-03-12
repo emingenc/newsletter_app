@@ -4,8 +4,9 @@
 
     <Newsletter  v-for="newsletter in newsletters"
      :key="newsletter.id" :id="newsletter.id" 
-     :title="newsletter.title" :news="newsletter.newa" 
-     :photo="newsletter.photo" :date="newsletter.date" />
+     :title="newsletter.title" :news="newsletter.news" 
+     :photo="newsletter.photo.startsWith('upload') ? `http://127.0.0.1:5000/${newsletter.photo}` : newsletter.photo"
+     :date="newsletter.date" />
     </div>
   </q-page>
 </template>
@@ -20,6 +21,7 @@ import { api } from 'src/boot/axios';
 let newsletterState = storeToRefs(useNewsletterStore())
 let authStore = useAuthStore()
 let newsletters = newsletterState.newsletters
+let newsletterr = newsletterState.newsletter
 
 
 api.get('newsletters').then(response => {

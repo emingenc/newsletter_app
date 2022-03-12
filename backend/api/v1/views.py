@@ -7,6 +7,7 @@ from flasgger import swag_from
 from pathlib import Path
 from flask_jwt_extended import jwt_required
 from backend.constants.http_status_codes import HTTP_200_OK, HTTP_201_CREATED, HTTP_404_NOT_FOUND
+from flask_cors import cross_origin
 
 
 v1 = Blueprint("v1", __name__, url_prefix="/api/v1")
@@ -33,6 +34,7 @@ def newsletters():
 
 @v1.post("/newsletters")
 @jwt_required()
+@cross_origin()
 @swag_from("docs/newsletters.yaml")
 def create_newsletter():
     # form data
@@ -77,6 +79,7 @@ def newsletter(id):
 
 @v1.put("/newsletters/<int:id>")
 @jwt_required()
+@cross_origin()
 @swag_from("docs/newsletters_detailed.yaml")
 def update_newsletter(id):
     data = request.form

@@ -4,7 +4,8 @@
         <q-card class="my-card q-pa-xl fit" flat bordered>
             <p class="row ">{{newsletter.date}}</p>
             <q-img
-                :src="newsletter.photo"
+             :src="newsletter.photo.startsWith('upload') ? `http://127.0.0.1:5000/${newsletter.photo}` : newsletter.photo"
+
             />
 
             <q-card-section>
