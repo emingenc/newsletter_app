@@ -25,6 +25,8 @@
             <div class="flex flex-center">
                 <q-btn  label="Submit" type="submit" color="primary"/>
             </div>
+            <h6 class="flex flex-center" >{{message}}</h6>
+
          </q-form>
         
     </q-page>
@@ -43,6 +45,7 @@ let authStore = useAuthStore()
 
 let email = ref('')
 let password = ref('')
+var message = ref('')
 
 let headers = {
     'accept': 'application/json',
@@ -58,10 +61,13 @@ function onSubmit(e) {
     }
     api.post('auth/login', submitResult.value, headers)
     .then(response => {
+        console.log(response.data)
      authStore.user = response.data.user
 
     }).then(() => {
         router.push('/')
+    }).catch(error => {
+        message.value = 'Invalid email or password'
     })
 }
 
