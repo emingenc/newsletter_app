@@ -38,7 +38,7 @@ api.get('/api/v1/newsletters/'+id).then(response => {
         id: response.data.id,
         title: response.data.title,
         news: response.data.news,
-        photo: response.data.photo,
+        photo: response.data.photo || `https://picsum.photos/id/${Math.floor(Math.random() * 100) + 1}/400/300`,
         date: response.data.date
     }
 })
