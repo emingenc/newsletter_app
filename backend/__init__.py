@@ -6,12 +6,14 @@ from backend.database import db
 from flasgger import Swagger
 from backend.config.swagger import template, swagger_config
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS, cross_origin
 
 def create_app(test_config=None):
 
     app = Flask(__name__,instance_relative_config=True,
                 static_url_path='', 
                 static_folder='static',)
+    cors = CORS(app, resources={r"*": {"origins": "*"}})
 
     if test_config:
         app.config.from_mapping(test_config)
