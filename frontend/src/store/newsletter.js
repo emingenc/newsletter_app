@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { watch } from "vue";
 
 export const useNewsletterStore = defineStore("main", {
     state: () => ({
@@ -33,3 +34,11 @@ export const useNewsletterStore = defineStore("main", {
         },
     }
 });
+
+watch(
+    () => useNewsletterStore,
+    () => {
+      localStorage.setItem(STATE_NAME, JSON.stringify(useNewsletterStore));
+    },
+    { deep: true }
+  );
