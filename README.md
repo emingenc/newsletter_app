@@ -30,3 +30,12 @@ after you logged in there will be a button to create a new newsletter.
 
 and when you click detail view as logged in there will be  delete and edit buttons.
 
+## Backend docs
+
+Backend docs at '/docs' endpoint
+
+'localhost:8000/docs'
+
+you can test swagger docs
+
+
