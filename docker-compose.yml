@@ -2,8 +2,8 @@ version: '3.7'
 
 services:
 
-  postgis:
-    image: postgis/postgis
+  postgres:
+    image: postgres:14
     restart: always
     hostname: '${POSTGIS_HOSTNAME}'
     environment:
@@ -27,7 +27,7 @@ services:
         - -c
         - 'python3 manage.py '
     depends_on:
-        - postgis
+        - postgres
     env_file:
         - docker.env
 volumes:

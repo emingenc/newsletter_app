@@ -8,7 +8,7 @@ from backend.config.swagger import template, swagger_config
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 dbuser = os.environ.get('POSTGRES_USERNAME')
-dbpass = os.environ.get('pasword_postgres')
+dbpass = os.environ.get('POSTGRES_PASSWORD')
 dbhost = os.environ.get('POSTGIS_HOSTNAME')
 dbname = os.environ.get('DBNAME')
 
