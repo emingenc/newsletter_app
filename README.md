@@ -14,7 +14,7 @@ docker-compose up
 
 ### create a admin user
 
-After docker compose up, youcan create a new user with the 'http://localhost/#/register' url.
+After docker compose up, you can create a new user with the 'http://localhost/#/register' url.
 
 I did not put nav button for register since it is admin only.
 
