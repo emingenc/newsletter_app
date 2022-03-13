@@ -9,7 +9,7 @@
      :date="newsletter.date" />
     </div>
     <q-page-sticky v-if="authStore.user.access" position="bottom-right" :offset="[18, 18]">
-            <q-btn  fab icon="add" color="primary" />
+            <q-btn  fab icon="add" color="primary" to='/add' />
     </q-page-sticky>
   </q-page>
 </template>

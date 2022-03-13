@@ -69,7 +69,7 @@ api.get('auth/me', {
 
 let title = ref('')
 let news = ref('')
-let file = ref('')
+let file = ref(null)
 
 
 const onSubmit = (e) => {

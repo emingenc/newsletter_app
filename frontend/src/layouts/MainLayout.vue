@@ -21,7 +21,6 @@
 import { useAuthStore } from 'src/store/auth';
 
 const authStore = useAuthStore()
-console.log({...authStore.user})
 
 let isLoggedIn = () =>   {
   return authStore.user.access ? true : false
