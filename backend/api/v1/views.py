@@ -114,3 +114,24 @@ def update_newsletter(id):
         "date": newsletter.date
     }) , HTTP_200_OK
 
+
+# delete a newsletter
+@v1.delete("/newsletters/<int:id>")
+@jwt_required()
+@cross_origin()
+@swag_from("docs/newsletters_detailed.yaml")
+def delete_newsletter(id):
+    newsletter = Newsletter.query.get(id)
+    db.session.delete(newsletter)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Newsletter deleted successfully",
+        "id": newsletter.id,
+        "news": newsletter.news,
+        "title": newsletter.title,
+        "photo": newsletter.photo,
+        "date": newsletter.date
+    }) , HTTP_200_OK
+
+

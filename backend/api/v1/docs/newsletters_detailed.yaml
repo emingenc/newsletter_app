@@ -18,6 +18,21 @@ get:
     '401':
       description: Fails to get items due to authentication error
 
+delete:
+  path: /newsletters/{id}
+  description: Delete newsletters
+  parameters:
+    - in: path
+      name: id
+      required: true
+      type: integer
+
+  responses:
+    '200':
+      description: Newsletters deleted
+    '401':
+      description: Fails to delete newsletters due to authentication error
+
 put:
   path: /newsletters/{id}
   description: Update a newsletter
