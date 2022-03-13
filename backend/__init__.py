@@ -23,7 +23,7 @@ def create_app(test_config=None):
     else:
         app.config.from_mapping(
             SECRET_KEY=os.environ.get("SECRET_KEY"),
-            SQLALCHEMY_DATABASE_URI=f'postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}',
+            SQLALCHEMY_DATABASE_URI=f'postgresql://{dbuser}:{dbpass}@{dbhost}/{dbname}',
             SQLALCHEMY_TRACK_MODIFICATIONS=False,
             JWT_SECRET_KEY=os.environ.get('JWT_SECRET_KEY'),
 

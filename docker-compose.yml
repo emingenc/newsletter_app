@@ -3,9 +3,9 @@ version: '3.7'
 services:
 
   postgres:
-    image: postgres:14
+    image: postgres:13
     restart: always
-    hostname: '${POSTGIS_HOSTNAME}'
+    hostname: postgres
     environment:
         POSTGRES_USER: '${POSTGRES_USERNAME}'
         POSTGRES_PASSWORD: '${POSTGRES_PASSWORD}'
