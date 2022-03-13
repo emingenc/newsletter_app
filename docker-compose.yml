@@ -36,6 +36,8 @@ services:
             - bash
             - -c
             - 'python3 manage.py '
+        ports:
+            - 8000:8000
         depends_on:
             - postgres
         env_file:
