@@ -6,7 +6,11 @@ from backend.database import db
 from flasgger import Swagger
 from backend.config.swagger import template, swagger_config
 from flask_jwt_extended import JWTManager
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
+dbuser = os.environ.get('POSTGRES_USERNAME')
+dbpass = os.environ.get('POSTGRES_PASSWORD')
+dbhost = os.environ.get('POSTGIS_HOSTNAME')
+dbname = os.environ.get('DBNAME')
 
 def create_app(test_config=None):
 
@@ -19,7 +23,7 @@ def create_app(test_config=None):
     else:
         app.config.from_mapping(
             SECRET_KEY=os.environ.get("SECRET_KEY"),
-            SQLALCHEMY_DATABASE_URI=os.environ.get("SQLALCHEMY_DB_URI"),
+            SQLALCHEMY_DATABASE_URI=f'postgresql://{dbuser}:{dbpass}@{dbhost}/{dbname}',
             SQLALCHEMY_TRACK_MODIFICATIONS=False,
             JWT_SECRET_KEY=os.environ.get('JWT_SECRET_KEY'),
 

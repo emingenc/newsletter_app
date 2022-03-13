@@ -5,7 +5,7 @@
 
         <div>
             <q-img
-                :src="newsletter.photo ? `http://127.0.0.1:5000/${newsletter.photo}` : newsletter.photo"
+                :src="newsletter.photo ? `http://127.0.0.1:8000/${newsletter.photo}` : newsletter.photo"
             />
     
            <q-file

@@ -5,7 +5,7 @@
             <q-btn class=""  size="md" flat  icon="arrow_back" to="/" ></q-btn>
             <p class="row ">{{newsletter.date}}</p>
             <q-img
-             :src="newsletter.photo ? `http://127.0.0.1:5000/${newsletter.photo}` : newsletter.photo"
+             :src="newsletter.photo ? `http://127.0.0.1:8000/${newsletter.photo}` : newsletter.photo"
 
             />
 

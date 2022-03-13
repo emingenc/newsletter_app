@@ -1,0 +1,48 @@
+version: '3.7'
+
+services:
+    nginx: 
+        image: nginx
+        container_name: frontend
+        restart: always
+        volumes:
+            - ./frontend/dist/spa/:/usr/share/nginx/html/
+
+        ports:
+            - 80:80
+            - 443:443
+        depends_on:
+            - api
+
+    postgres:
+        image: postgres:13
+        restart: always
+        hostname: postgres
+        environment:
+            POSTGRES_USER: '${POSTGRES_USERNAME}'
+            POSTGRES_PASSWORD: '${POSTGRES_PASSWORD}'
+            POSTGRES_DB: '${DBNAME}'
+        ports:
+        - "${PORT_POSTGRES}:${PORT_POSTGRES}"
+        volumes:
+            - postgres_data:/var/lib/postgresql/data/
+
+    api:
+        build: .
+        restart: always
+        volumes:
+            - ./:/app
+        command:
+            - bash
+            - -c
+            - 'python3 manage.py '
+        ports:
+            - 8000:8000
+        depends_on:
+            - postgres
+        env_file:
+            - docker.env
+volumes:
+    postgres_data:
+
+  
