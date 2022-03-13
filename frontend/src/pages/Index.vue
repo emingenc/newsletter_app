@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <div class="flex flex-center q-pa-xl q-gutter-xl">
+    <div class="flex fit flex-center q-pa-xl q-gutter-xl">
 
     <Newsletter  v-for="newsletter in newsletters"
      :key="newsletter.id" :id="newsletter.id" 
