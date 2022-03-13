@@ -2,6 +2,7 @@
     <q-page class="flex flex-center fit">
         
         <q-card class="my-card q-pa-xl fit" flat bordered>
+            <q-btn class=""  size="md" flat  icon="arrow_back" to="/" ></q-btn>
             <p class="row ">{{newsletter.date}}</p>
             <q-img
              :src="newsletter.photo ? `http://127.0.0.1:5000/${newsletter.photo}` : newsletter.photo"
@@ -32,7 +33,6 @@ let newsletter = newsletterState.newsletter
 const route = useRoute()
 
 let id = route.params.id
-console.log(id)
 
 api.get('newsletters/'+id).then(response => {
     useNewsletterStore().newsletter = {

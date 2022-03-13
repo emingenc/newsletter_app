@@ -4,11 +4,15 @@
    <q-form @submit="onSubmit" class="q-gutter-md">
 
         <div>
+            <q-img
+                :src="newsletter.photo ? `http://127.0.0.1:5000/${newsletter.photo}` : newsletter.photo"
+            />
+    
            <q-file
                 name="newsletter_photo"
-                v-model="newsletter.photo"
+                v-model="file"
                 filled
-                label="Select newsletter image"
+                label="Change newsletter image"
             />
         </div>
      
@@ -23,7 +27,7 @@
         
         </div>
         <div class="flex flex-center">
-                <q-btn  label="Add Newsletter" type="submit" color="primary"/>
+                <q-btn  label="Update Newsletter" type="submit" color="primary"/>
         </div>
     </q-form>
 
@@ -32,18 +36,17 @@
 <script setup>
 import {useNewsletterStore} from 'src/store/newsletter'
 import { useAuthStore } from 'src/store/auth';
-import { storeToRefs} from 'pinia'
 import { api } from 'src/boot/axios';
-import { useRoute } from 'vue-router'
+import { useRoute , useRouter} from 'vue-router'
 import { ref } from 'vue';
 
-let newsletterState = storeToRefs(useNewsletterStore())
+let newsletterState = useNewsletterStore()
 let newsletter = newsletterState.newsletter
 
 const route = useRoute()
+const router = useRouter()
 
 let id = route.params.id
-console.log(id)
 
 api.get('newsletters/'+id).then(response => {
     useNewsletterStore().newsletter = {
@@ -71,7 +74,6 @@ api.get('auth/me', {
 
     }
 }).then(res => {
-    console.log(res.data)
 }).catch(err => {
     let refreshToken = authStore.user.refresh
         api.get('auth/token/refresh', {
@@ -86,28 +88,25 @@ api.get('auth/me', {
 
             })
     })
-
-let title = ref('')
-let news = ref('')
-let file = ref('')
-
+let file = ref(null)
 
 const onSubmit = (e) => {
     e.preventDefault()
     let formData = new FormData()
-    formData.append('title', title.value)
-    formData.append('news', news.value)
-    formData.append('photo', file.value, file.value.name, file.value.type)
+    formData.append('title', newsletter.title)
+    formData.append('news', newsletter.news)
+    if (file.value !== null) {
+        formData.append('photo', file.value, file.value.name, file.value.type)
+    }
     
-    console.log(accessToken.value)
-    api.post('newsletters',formData, {headers: {
+    api.put(`newsletters/${id}`,formData, {headers: {
         'Authorization': accessToken.value,
         'accept': 'application/json',
         'Content-Type': 'multipart/form-data',
         'Access-Control-Allow-Origin': '*'
 
     }},  ).then(res => {
-        router.push('/newsletter/' + res.data.id)
+        router.push('/newsletter/' +id)
 
     }).catch(err => {
         console.log(err)

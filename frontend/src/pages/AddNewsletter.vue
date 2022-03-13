@@ -52,7 +52,6 @@ api.get('auth/me', {
 
     }
 }).then(res => {
-    console.log(res.data)
 }).catch(err => {
     let refreshToken = authStore.user.refresh
         api.get('auth/token/refresh', {
@@ -80,7 +79,6 @@ const onSubmit = (e) => {
     formData.append('news', news.value)
     formData.append('photo', file.value, file.value.name, file.value.type)
     
-    console.log(accessToken.value)
     api.post('newsletters',formData, {headers: {
         'Authorization': accessToken.value,
         'accept': 'application/json',

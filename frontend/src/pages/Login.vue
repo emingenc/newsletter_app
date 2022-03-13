@@ -61,7 +61,6 @@ function onSubmit(e) {
     }
     api.post('auth/login', submitResult.value, headers)
     .then(response => {
-        console.log(response.data)
      authStore.user = response.data.user
 
     }).then(() => {
