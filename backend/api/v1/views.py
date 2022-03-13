@@ -43,10 +43,15 @@ def create_newsletter():
     title = data.get("title")
     file = request.files.get("photo")
     name = str(uuid.uuid4()).split('-')[0]
-    ext = file.filename.split('.')[-1]
-    photo = f'{os.environ.get("UPLOAD_FOLDER")}{ name}.{ext}'
-    photo_name = f'uploads/{name}.{ext}'
-    file.save(photo)
+
+    print(request.files)
+    print('sdadsads')
+    photo_name = None
+    if file:
+        ext = file.filename.split('.')[-1]
+        photo = f'{os.environ.get("UPLOAD_FOLDER")}{ name}.{ext}'
+        photo_name = f'uploads/{name}.{ext}'
+        file    .save(photo)
 
     newsletter = Newsletter(news = news, title = title, photo = photo_name)
     db.session.add(newsletter)
@@ -88,9 +93,7 @@ def update_newsletter(id):
     newsletter.news = data["news"]
     newsletter.title = data["title"]
     file = request.files.get("photo")
-
     if file:
-        print(newsletter.photo,'sddsad')
         old_photo = Path.cwd() / 'backend/static'/newsletter.photo
         print(old_photo)
         if old_photo.exists():
