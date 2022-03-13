@@ -5,7 +5,7 @@
     <Newsletter  v-for="newsletter in newsletters"
      :key="newsletter.id" :id="newsletter.id" 
      :title="newsletter.title" :news="newsletter.news" 
-     :photo="newsletter.photo ? `http://api:8000/${newsletter.photo}` : newsletter.photo"
+     :photo="newsletter.photo ? `http://127.0.0.1:8000/${newsletter.photo}` : newsletter.photo"
      :date="newsletter.date" />
     </div>
     <q-page-sticky v-if="authStore.user.access" position="bottom-right" :offset="[18, 18]">
