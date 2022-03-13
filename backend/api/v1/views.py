@@ -43,9 +43,6 @@ def create_newsletter():
     title = data.get("title")
     file = request.files.get("photo")
     name = str(uuid.uuid4()).split('-')[0]
-
-    print(request.files)
-    print('sdadsads')
     photo_name = None
     if file:
         ext = file.filename.split('.')[-1]
