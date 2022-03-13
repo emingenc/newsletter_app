@@ -5,7 +5,9 @@
         <q-toolbar-title>
           Newsletter App
         </q-toolbar-title>
-
+        <q-space/>
+        <q-btn v-if="isLoggedIn()" label="Logout" flat color="white" @click="logout()" />
+        <q-btn v-if="!isLoggedIn()" label="Login as admin" flat color="white" to="/login" />
       </q-toolbar>
     </q-header>
 
@@ -15,18 +17,20 @@
   </q-layout>
 </template>
 
-<script>
-import { defineComponent, ref } from 'vue'
+<script setup>
+import { useAuthStore } from 'src/store/auth';
 
-export default defineComponent({
-  name: 'MainLayout',
+const authStore = useAuthStore()
+console.log({...authStore.user})
 
-  components: {
-  },
+let isLoggedIn = () =>   {
+  return authStore.user.access ? true : false
+}
 
-  setup () {
-    return {
-    }
-  }
-})
+const logout = () => {
+  authStore.user = {}
+}
+
+
+
 </script>

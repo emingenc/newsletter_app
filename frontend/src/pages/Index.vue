@@ -8,6 +8,9 @@
      :photo="newsletter.photo ? `http://127.0.0.1:5000/${newsletter.photo}` : newsletter.photo"
      :date="newsletter.date" />
     </div>
+    <q-page-sticky v-if="authStore.user.access" position="bottom-right" :offset="[18, 18]">
+            <q-btn  fab icon="add" color="primary" />
+    </q-page-sticky>
   </q-page>
 </template>
 
