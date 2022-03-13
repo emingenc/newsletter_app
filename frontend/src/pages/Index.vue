@@ -24,7 +24,6 @@ import { api } from 'src/boot/axios';
 let newsletterState = storeToRefs(useNewsletterStore())
 let authStore = useAuthStore()
 let newsletters = newsletterState.newsletters
-let newsletterr = newsletterState.newsletter
 
 
 api.get('newsletters').then(response => {
