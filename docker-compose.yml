@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+
+  postgis:
+    image: postgis/postgis
+    restart: always
+    hostname: '${POSTGIS_HOSTNAME}'
+    environment:
+        POSTGRES_USER: '${POSTGRES_USERNAME}'
+        POSTGRES_PASSWORD: '${POSTGRES_PASSWORD}'
+        POSTGRES_DB: '${DBNAME}'
+    ports:
+      - "${PORT_POSTGRES}:${PORT_POSTGRES}"
+    volumes:
+        - postgres_data:/var/lib/postgresql/data/
+
+  api:
+    build: .
+    restart: always
+    ports:
+        - 8000:8000
+    volumes:
+        - ./:/app
+    command:
+        - bash
+        - -c
+        - 'python3 manage.py '
+    depends_on:
+        - postgis
+    env_file:
+        - docker.env
+volumes:
+    postgres_data:
+
+  
